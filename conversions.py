@@ -14,27 +14,27 @@ def convertCelsiusToFahrenheit(celsius):
 
 def convertFahrenheitToCelsius(fahrenheit):
     """Takes in a Fahrenheit measurement and returns Celsius"""
-    celsius = 0.0
+    celsius = (fahrenheit - 32) * 5 / 9
 
     return celsius
 
 
 def convertFahrenheitToKelvin(fahrenheit):
     """Takes in a Fahrenheit measurement and returns Kelvin"""
-    kelvins = 0.0
+    kelvins = (fahrenheit - 32) * 5 / 9 + 273.15
 
     return kelvins
 
 
 def convertKelvinToFahrenheit(kelvin):
     """Takes in a Kelvin measurement and returns Fahrenheit"""
-    fahrenheit = 0.0
+    fahrenheit = (kelvin - 273.15) * 9 / 5 + 32
 
     return fahrenheit
 
 
 def convertKelvinToCelsius(kelvin):
     """Takes in a Kelvin measurement and returns Celsius"""
-    celsius = 0.0
+    celsius = kelvin - 273.15
 
     return celsius
