@@ -104,7 +104,7 @@ class TestTemperatureConversions(unittest.TestCase):
                 expected,
                 places=2
             )
-        def testRefactoredTemperatureConversions(self):
+    def testRefactoredTemperatureConversions(self):
         test_cases = [
             ('Celsius', 'Fahrenheit', 0.0, 32.0),
             ('Celsius', 'Kelvin', 100.0, 373.15),
