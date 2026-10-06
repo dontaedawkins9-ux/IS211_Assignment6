@@ -1,6 +1,6 @@
 import unittest
 import conversions
-
+import conversions_refactored
 
 class TestTemperatureConversions(unittest.TestCase):
 
@@ -104,7 +104,68 @@ class TestTemperatureConversions(unittest.TestCase):
                 expected,
                 places=2
             )
+        def testRefactoredTemperatureConversions(self):
+        test_cases = [
+            ('Celsius', 'Fahrenheit', 0.0, 32.0),
+            ('Celsius', 'Kelvin', 100.0, 373.15),
+            ('Fahrenheit', 'Celsius', 212.0, 100.0),
+            ('Fahrenheit', 'Kelvin', 32.0, 273.15),
+            ('Kelvin', 'Celsius', 273.15, 0.0),
+            ('Kelvin', 'Fahrenheit', 373.15, 212.0)
+        ]
 
+        for fromUnit, toUnit, value, expected in test_cases:
+            print("Testing", fromUnit, "to", toUnit)
+            self.assertAlmostEqual(
+                conversions_refactored.convert(fromUnit, toUnit, value),
+                expected,
+                places=2
+            )
+
+    def testRefactoredDistanceConversions(self):
+        test_cases = [
+            ('Miles', 'Yards', 1.0, 1760.0),
+            ('Miles', 'Meters', 1.0, 1609.344),
+            ('Yards', 'Miles', 1760.0, 1.0),
+            ('Yards', 'Meters', 1.0, 0.9144),
+            ('Meters', 'Miles', 1609.344, 1.0),
+            ('Meters', 'Yards', 0.9144, 1.0)
+        ]
+
+        for fromUnit, toUnit, value, expected in test_cases:
+            print("Testing", fromUnit, "to", toUnit)
+            self.assertAlmostEqual(
+                conversions_refactored.convert(fromUnit, toUnit, value),
+                expected,
+                places=4
+            )
+
+    def testSameUnitConversions(self):
+        units = [
+            'Celsius',
+            'Fahrenheit',
+            'Kelvin',
+            'Miles',
+            'Yards',
+            'Meters'
+        ]
+
+        for unit in units:
+            print("Testing same unit conversion:", unit)
+            self.assertEqual(
+                conversions_refactored.convert(unit, unit, 100.0),
+                100.0
+            )
+
+    def testIncompatibleConversions(self):
+        print("Testing incompatible conversion")
+        with self.assertRaises(
+                conversions_refactored.ConversionNotPossible):
+            conversions_refactored.convert(
+                'Celsius',
+                'Meters',
+                100.0
+            )
 
 if __name__ == '__main__':
     unittest.main()
